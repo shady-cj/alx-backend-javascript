@@ -1,26 +1,23 @@
 export default function createIteratorObject(report) {
-    const employeeNames = []
+  const employeeNames = [];
 
-    for (let dept in report.allEmployees) {
-        let employees = report.allEmployees[dept]
-        employeeNames.push(...employees)
-    }
+  for (const dept of Object.keys(report.allEmployees)) {
+    const employees = report.allEmployees[dept];
+    employeeNames.push(...employees);
+  }
 
-    return {
-        [Symbol.iterator]() {
-            return {
+  return {
+    [Symbol.iterator]() {
+      return {
 
-                next() {
-                    if (employeeNames.length) {
-                        const currentEmployee = employeeNames.shift()
-                        return { done: false, value: currentEmployee }
-
-                    } else {
-                        return { done: true, value: undefined }
-                    }
-
-                }
-            }
-        }
-    }
+        next() {
+          if (employeeNames.length) {
+            const currentEmployee = employeeNames.shift();
+            return { done: false, value: currentEmployee };
+          }
+          return { done: true, value: undefined };
+        },
+      };
+    },
+  };
 }
