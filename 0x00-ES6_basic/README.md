@@ -343,3 +343,85 @@ bob@dylan:~$
 ```
 
 **File**: `8-getBudgetCurrentYear.js`
+
+
+
+### 9. ES6 method properties
+
+Rewrite getFullBudgetObject to use ES6 method properties in the fullBudget object
+
+```
+import getBudgetObject from './7-getBudgetObject.js';
+
+export default function getFullBudgetObject(income, gdp, capita) {
+  const budget = getBudgetObject(income, gdp, capita);
+  const fullBudget = {
+    ...budget,
+    getIncomeInDollars: function (income) {
+      return `$${income}`;
+    },
+    getIncomeInEuros: function (income) {
+      return `${income} euros`;
+    },
+  };
+
+  return fullBudget;
+}
+```
+Execution:
+
+```
+bob@dylan:~$ cat 9-main.js
+import getFullBudgetObject from './9-getFullBudget.js';
+
+const fullBudget = getFullBudgetObject(20, 50, 10);
+
+console.log(fullBudget.getIncomeInDollars(fullBudget.income));
+console.log(fullBudget.getIncomeInEuros(fullBudget.income));
+
+bob@dylan:~$
+bob@dylan:~$ npm run dev 9-main.js 
+$20
+20 euros
+bob@dylan:~$
+```
+
+**File**: `9-getFullBudget.js`
+
+
+
+
+
+
+### 10. For...of Loops
+
+Rewrite the function appendToEachArrayValue to use ES6’s for...of operator. And don’t forget that var is not ES6-friendly.
+
+```
+export default function appendToEachArrayValue(array, appendString) {
+  for (var idx in array) {
+    var value = array[idx];
+    array[idx] = appendString + value;
+  }
+
+  return array;
+}
+```
+
+Execution:
+
+
+```
+bob@dylan:~$ cat 10-main.js
+import appendToEachArrayValue from './10-loops.js';
+
+console.log(appendToEachArrayValue(['appended', 'fixed', 'displayed'], 'correctly-'));
+
+bob@dylan:~$
+bob@dylan:~$ npm run dev 10-main.js 
+[ 'correctly-appended', 'correctly-fixed', 'correctly-displayed' ]
+bob@dylan:~$
+```
+
+
+**File**: `10-loops.js`
