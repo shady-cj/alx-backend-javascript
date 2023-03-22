@@ -111,16 +111,15 @@ bob@dylan:~$
 
 
 ### 3. Handle multiple successful promises
-mandatory
-In this file, import uploadPhoto and createUser from utils.js
+In this file, import `uploadPhoto` and `createUser` from `utils.js`
 
-Knowing that the functions in utils.js return promises, use the prototype below to collectively resolve all promises and log body firstName lastName to the console.
+Knowing that the functions in `utils.js` return promises, use the prototype below to collectively resolve all promises and log body firstName lastName to the console.
 ```
 function handleProfileSignup()
 ```
 
 
-In the event of an error, log Signup system offline to the console
+In the event of an error, log `Signup system offline` to the console
 
 
 ```
@@ -134,5 +133,39 @@ bob@dylan:~$ npm run dev 3-main.js
 photo-profile-1 Guillaume Salva
 bob@dylan:~$ 
 ```
-**File**: `3-all`
+**File**: `3-all.js`
 
+
+
+### 4. Simple promise
+
+Using the following prototype
+
+```
+function signUpUser(firstName, lastName) {
+}
+```
+
+That returns a resolved promise with this object:
+
+```
+{
+  firstName: value,
+  lastName: value,
+}
+```
+
+```
+bob@dylan:~$ cat 4-main.js
+import signUpUser from "./4-user-promise";
+
+console.log(signUpUser("Bob", "Dylan"));
+
+bob@dylan:~$ 
+bob@dylan:~$ npm run dev 4-main.js 
+Promise { { firstName: 'Bob', lastName: 'Dylan' } }
+bob@dylan:~$ 
+```
+
+
+**File**: `4-user-promise`
