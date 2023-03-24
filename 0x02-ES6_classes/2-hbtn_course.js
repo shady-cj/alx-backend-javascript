@@ -23,11 +23,8 @@ export default class HolbertonCourse {
   }
 
   set students(students) {
-    if (Array.isArray(students))
-    {
-      const valid = students.every((s) => {
-        return typeof s === 'string';
-      });
+    if (Array.isArray(students)) {
+      const valid = students.every((s) => typeof s === 'string');
       if (valid) {
         this._students = students;
       } else {
