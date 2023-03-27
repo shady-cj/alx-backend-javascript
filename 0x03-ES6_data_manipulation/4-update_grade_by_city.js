@@ -4,9 +4,8 @@ export default function updateStudentGradeByCity(studentList, city, newGrades) {
     newGrades.forEach((grade) => {
       if (grade.studentId === student.id) {
         gradeInfo = grade;
-        return;
       }
-    })
-    return {...student, grade: gradeInfo?gradeInfo.grade:'N/A' };
+    });
+    return { ...student, grade: gradeInfo ? gradeInfo.grade : 'N/A' };
   });
 }
