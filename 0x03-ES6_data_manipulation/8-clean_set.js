@@ -4,7 +4,7 @@ export default function cleanSet(set, startString) {
   }
   let returnString = '';
   set.forEach((elem) => {
-    if (elem.indexOf(startString) === 0) {
+    if (elem.startsWith(startString)) {
       returnString += elem.replace(startString, '');
       returnString += '-';
     }
