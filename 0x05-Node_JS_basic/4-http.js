@@ -1,7 +1,9 @@
 const app = require('http');
 
 app.createServer((req, res) => {
-  res.write(Buffer.from('Hello Holberton School!'));
+  const responseText = 'Hello Holberton School!';
+  res.writeHead(200, {'Content-Type': 'text/plain', 'Content-Length': responseText.length})
+  res.write(responseText);
   res.end();
 }).listen(1245);
 
