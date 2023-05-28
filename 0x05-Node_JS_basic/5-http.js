@@ -3,17 +3,21 @@ const fs = require('fs');
 
 const app = http.createServer((req, res) => {
   let responseText = '';
-  if (req.url === "/") {
+  if (req.url === '/') {
     responseText += 'Hello Holberton School!';
     res.writeHead(200, { 'Content-Type': 'text/plain', 'Content-Length': responseText.length });
     res.write(responseText);
     res.end();
-  } else if (req.url === "/students") {
+  } else if (req.url === '/students') {
     const path = process.argv[2];
-    responseText += "This is the list of our students\n";
     if (!fs.existsSync(path)) {
-      throw new Error('Cannot load the database');
+      responseText += 'Cannot load the database';
+      res.writeHead(404, { 'Content-Type': 'text/plain', 'Content-Length': responseText.length });
+      res.write(responseText);
+      res.end();
+      return;
     }
+    responseText += 'This is the list of our students\n';
     const promData = fs.promises.readFile(path);
     promData.then((data) => {
       const dataArray = data.toString().split('\n');
@@ -29,9 +33,9 @@ const app = http.createServer((req, res) => {
         const field = splitData[splitData.length - 1];
         const firstName = splitData[0];
         if (field in mapFieldToStudents) {
-        mapFieldToStudents[field].push(firstName);
+          mapFieldToStudents[field].push(firstName);
         } else {
-        mapFieldToStudents[field] = [firstName];
+          mapFieldToStudents[field] = [firstName];
         }
       });
       responseText += `Number of students: ${NUMBER_OF_STUDENTS}\n`;
@@ -44,9 +48,7 @@ const app = http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/plain', 'Content-Length': responseText.length });
       res.write(responseText);
       res.end();
-    })
+    });
   }
- 
 }).listen(1245);
-
 module.exports = app;
