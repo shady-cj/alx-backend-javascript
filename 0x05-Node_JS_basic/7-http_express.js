@@ -45,7 +45,7 @@ app.get('/students', (req, res) => {
     });
     responseText = responseText.slice(0, -1);
     res.send(responseText);
+  });
 });
-})
 app.listen(PORT);
 module.exports = app;
