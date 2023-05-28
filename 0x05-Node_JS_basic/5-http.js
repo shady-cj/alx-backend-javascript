@@ -10,6 +10,7 @@ const app = http.createServer((req, res) => {
     res.end();
   } else if (req.url === '/students') {
     const path = process.argv[2];
+    responseText += 'This is the list of our students\n';
     if (!fs.existsSync(path)) {
       responseText += 'Cannot load the database';
       res.writeHead(200, { 'Content-Type': 'text/plain', 'Content-Length': responseText.length });
@@ -17,7 +18,6 @@ const app = http.createServer((req, res) => {
       res.end();
       return;
     }
-    responseText += 'This is the list of our students\n';
     const promData = fs.promises.readFile(path);
     promData.then((data) => {
       const dataArray = data.toString().split('\n');
