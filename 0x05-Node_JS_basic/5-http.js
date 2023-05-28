@@ -12,7 +12,7 @@ const app = http.createServer((req, res) => {
     const path = process.argv[2];
     if (!fs.existsSync(path)) {
       responseText += 'Cannot load the database';
-      res.writeHead(404, { 'Content-Type': 'text/plain', 'Content-Length': responseText.length });
+      res.writeHead(200, { 'Content-Type': 'text/plain', 'Content-Length': responseText.length });
       res.write(responseText);
       res.end();
       return;
